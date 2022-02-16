@@ -1,7 +1,7 @@
 import random
 import keyboard
 import time
-
+from tic_tac_toe_board_display import show_game
 
 game_display = []
 current_player = None
@@ -18,15 +18,6 @@ def initialize_game():
     global first_time
     first_time = True
 
-def show_game(board):
-    print("\n")
-    print(" | " + board[0] + " | " + board[1] + " | " + board[2] + " | ")
-    print("  --- --- ---")
-    print(" | " + board[3] + " | " + board[4] + " | " + board[5] + " | ")
-    print("  --- --- ---")
-    print(" | " + board[6] + " | " + board[7] + " | " + board[8] + " | ")
-    print("\n")
-
 
 def input_for_players(position_on_board):
     player_input = ""
@@ -35,8 +26,8 @@ def input_for_players(position_on_board):
     while not player_input.isnumeric():
         player_input = (input("Choose a place on the board: "))
         
-        for element in map(chr, range(49,58)):
-            if player_input == element:
+        for element in map(chr, range(49,58)): #map(chr, range(49,58)) - dla każdego elementu w zakresie wykonuje funkcje chr, 
+            if player_input == element:        # czyli zwraca elementy jako string od 1 do 9 (49 do 57 z tablicy ASCII)
                 valid_input = True
         if not valid_input:
             player_input = ""
@@ -49,7 +40,7 @@ def input_for_players(position_on_board):
         change_player()
 
 def check_win_1(board):    
-    if board[0] == board[1] == board[2] and board[1] != "?":
+    if board[0] == board[1] == board[2] and board[0] != "?":
         return True
     elif board[3] == board[4] == board[5] and board[3] != "?":
         return True
@@ -262,6 +253,12 @@ def AI_4():
                     change_player()
 
 
+def game_seq():
+    show_game(game_display)
+    input_for_players(game_display)
+    show_game(game_display)
+
+
 def game_start():
     player_input = (input("Choose game mode: 1 - player vs player, 2 - player vs AI easy, 3 - player vs AI medium, 4 - AI hard, 5 - AI ultra hard "))
     while game_running:        
@@ -271,17 +268,13 @@ def game_start():
             check_if_win(game_display)
             change_player()        
         elif player_input == "2":
-            show_game(game_display)
-            input_for_players(game_display)
-            show_game(game_display)
+            game_seq()
             check_if_win(game_display)
             change_player()
             AI()
             check_if_win(game_display)
         elif player_input == "3":
-            show_game(game_display)
-            input_for_players(game_display)
-            show_game(game_display)
+            game_seq()
             if check_win_1(game_display):
                 check_if_win(game_display)
                 break
@@ -292,9 +285,7 @@ def game_start():
                 check_if_win(game_display)
             check_tie(game_display)
         elif player_input == "4":
-            show_game(game_display)
-            input_for_players(game_display)
-            show_game(game_display)
+            game_seq()
             if check_win_1(game_display):
                 check_if_win(game_display)
                 break
@@ -306,9 +297,7 @@ def game_start():
                 check_if_win(game_display)
             check_tie(game_display)
         elif player_input == "5":
-            show_game(game_display)
-            input_for_players(game_display)
-            show_game(game_display)
+            game_seq()
             if check_win_1(game_display):
                 check_if_win(game_display)
                 break
