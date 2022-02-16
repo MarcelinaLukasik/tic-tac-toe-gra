@@ -1,7 +1,9 @@
 import random
 import keyboard
 import time
+import tic_tac_toe_AI_moves as AI_file
 from tic_tac_toe_board_display import show_game
+
 
 game_display = []
 current_player = None
@@ -60,70 +62,6 @@ def check_win_1(board):
         return False
 
 
-def AI_check_moves():
-    global game_display    
-    if (game_display[0] == "O" or game_display[1] == "O" or game_display[2] == "O") and (game_display[0] != "X" and game_display[1] != "X" and game_display[2] != "X"):
-        if game_display[0] == "?":
-            game_display[0] = "O" 
-        elif game_display[1] == "?":
-            game_display[1] = "O"
-        elif game_display[2] == "?":
-            game_display[2] = "O"
-    elif (game_display[3] == "O" or game_display[4] == "O" or game_display[5] == "O") and (game_display[3] != "X" and game_display[4] != "X" and game_display[5] != "X"):
-        if game_display[3] == "?":
-            game_display[3] = "O" 
-        elif game_display[4] == "?":
-            game_display[4] = "O"
-        elif game_display[5] == "?":
-            game_display[5] = "O"
-    elif (game_display[6] == "O" or game_display[7] == "O" or game_display[8] == "O") and (game_display[6] != "X" and game_display[7] != "X" and game_display[8] != "X"):
-        if game_display[6] == "?":
-            game_display[6] = "O" 
-        elif game_display[7] == "?":
-            game_display[7] = "O"
-        elif game_display[8] == "?":
-            game_display[8] = "O"
-    elif (game_display[0] == "O" or game_display[3] == "O" or game_display[6] == "O") and (game_display[0] != "X" and game_display[3] != "X" and game_display[6] != "X"):
-        if game_display[0] == "?":
-            game_display[0] = "O" 
-        elif game_display[3] == "?":
-            game_display[3] = "O"
-        elif game_display[6] == "?":
-            game_display[6] = "O"
-    elif (game_display[1] == "O" or game_display[4] == "O" or game_display[7] == "O") and (game_display[1] != "X" and game_display[4] != "X" and game_display[7] != "X"):
-        if game_display[1] == "?":
-            game_display[1] = "O" 
-        elif game_display[4] == "?":
-            game_display[4] = "O"
-        elif game_display[7] == "?":
-            game_display[7] = "O"
-    elif (game_display[2] == "O" or game_display[5] == "O" or game_display[8] == "O") and (game_display[2] != "X" and game_display[5] != "X" and game_display[8] != "X"):
-        if game_display[2] == "?":
-            game_display[2] = "O" 
-        elif game_display[5] == "?":
-            game_display[5] = "O"
-        elif game_display[8] == "?":
-            game_display[8] = "O"
-    elif (game_display[0] == "O" or game_display[4] == "O" or game_display[8] == "O") and (game_display[0] != "X" and game_display[4] != "X" and game_display[8] != "X"):
-        if game_display[0] == "?":
-            game_display[0] = "O" 
-        elif game_display[4] == "?":
-            game_display[4] = "O"
-        elif game_display[8] == "?":
-            game_display[8] = "O"
-    elif (game_display[2] == "O" or game_display[4] == "O" or game_display[6] == "O") and (game_display[2] != "X" and game_display[4] != "X" and game_display[6] != "X"):
-        if game_display[2] == "?":
-            game_display[2] = "O" 
-        elif game_display[4] == "?":
-            game_display[4] = "O"
-        elif game_display[6] == "?":
-            game_display[6] = "O"
-    else:
-        for position in range(0,9):   
-           if game_display[position] == "?":
-                game_display[position] = "O"
-                break
-
 def check_tie(board):
     global game_running
     if "?" not in board:
@@ -147,7 +85,7 @@ def change_player():
     else:
         current_player = "X"
 
-def AI():
+def AI():                                   # Wybiera losowe, wolne miejsce na planszy
     while current_player == "O":
         print("Computer turn...")
         time.sleep(1)
@@ -157,7 +95,7 @@ def AI():
             change_player()
 
 
-def AI_2():
+def AI_2():                                         # Sprawdza, czy ruch daje wygraną
     global game_display
     while current_player == "O":
         print("Computer turn...")
@@ -205,7 +143,7 @@ def AI_3():
                     else:
                         game_display[position] = "?"
             if not is_win:
-                AI_check_moves()
+                game_display = AI_file.AI_check_moves(board=game_display)
                 change_player()
 
 def AI_4():
@@ -249,7 +187,7 @@ def AI_4():
                         else:
                             game_display[position] = "?"
                 if not is_win:
-                    AI_check_moves()
+                    game_display = AI_file.AI_check_moves(board = game_display)
                     change_player()
 
 
