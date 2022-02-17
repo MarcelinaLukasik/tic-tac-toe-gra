@@ -62,7 +62,7 @@ def input_for_players(position_on_board):
 def check_win_1(board):                                                # Porównuje czy 3 pola są takie same, ale nie są "?"
     if board[0][0] == board[0][1] == board[0][2] and board[0][0] != "?":
         return True
-    elif board[1][0] == board[1][1] == board[0][2] and board[1][0] != "?":
+    elif board[1][0] == board[1][1] == board[1][2] and board[1][0] != "?":
         return True
     elif board[2][0] == board[2][1] == board[2][2] and board[2][0] != "?":
         return True
@@ -115,7 +115,7 @@ def change_player():
 def AI_2():                                         # Dodatkowo sprawdza, czy ruch daje wygraną
     global game_display
     while current_player == "O":
-        print("Computer turn...")
+        # print("Computer turn...")
         time.sleep(1)
         is_win = False
         for row in range(len(game_display)):     
@@ -125,7 +125,6 @@ def AI_2():                                         # Dodatkowo sprawdza, czy ru
                     if check_win_1(game_display):
                         is_win = True
                         break
-            
                     else:
                         game_display[row][element] = "?" 
             if is_win:
@@ -202,6 +201,8 @@ def game_seq():
 
 def game_start():
     player_input = (input("Choose game mode: 1 - player vs player, 2 - player vs AI easy, 3 - player vs AI medium, 4 - AI hard "))
+    global game_display
+    global current_player
     while game_running:        
         if player_input == "1":
             show_game(game_display)
@@ -212,7 +213,7 @@ def game_start():
             game_seq()
             check_if_win(game_display)
             change_player()
-            AI(current_player, game_display)
+            game_display, current_player = AI(current_player, game_display)
             check_if_win(game_display)
         elif player_input == "3":
             game_seq()
