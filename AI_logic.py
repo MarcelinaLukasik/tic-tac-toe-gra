@@ -12,16 +12,15 @@ def AI_1(current_player, game_display):  # Wybiera losowe, wolne miejsce na plan
         col = random.randint(0, 2)
         if game_display[row][col] == "?":
             game_display[row][col] = "O"
+            winner = "O"
             current_player = "X"
-
-    return current_player, game_display
+    return current_player, game_display, winner
 
 
 def AI_2(game_display, current_player):  # Dodatkowo sprawdza, czy ruch daje wygraną
     print("Computer turn...")
     while current_player == "O":
         time.sleep(1)
-        is_win = False
         for row in range(len(game_display)):
             for element in range(len(game_display[row])):
                 if game_display[row][element] == "?":
