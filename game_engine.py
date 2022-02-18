@@ -1,8 +1,4 @@
-from board_display import show_game
-from end_game_logic import check_if_win, check_win, check_tie
-from player_logic import get_human_coordinates, change_player
 from modes import pvp_mode, AI_mode_1, AI_mode_2, AI_mode_3
-
 
 def game_start(game_display, game_running, current_player, first_time):
     player_input = (
