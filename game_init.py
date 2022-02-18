@@ -5,3 +5,4 @@ def initialize_game():
     first_time = True
 
     return game_display, game_running, current_player, first_time
+

@@ -34,8 +34,8 @@ def check_if_win(board, current_player):
 
 def check_tie(board):
     for row in range(len(board)):
-        for element in range(len(board[row])):
-            if board[row][element] == "?":
+        for col in range(len(board[row])):
+            if board[row][col] == "?":
                 tie = False
                 return tie
     show_game(board)

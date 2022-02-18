@@ -1,16 +1,16 @@
 from AI_logic import AI_1, AI_2, AI_3
 from board_display import show_game
 from end_game_logic import check_if_win, check_win, check_tie
-from player_logic import input_for_players, change_player
+from player_logic import get_human_coordinates, change_player
 
 
 def game_start(game_display, game_running, current_player, first_time):
     player_input = (
-        input("Choose game mode: 1 - player vs player, 2 - player vs AI easy, 3 - player vs AI medium, 4 - AI hard "))
+        input("Choose game mode: 1 - player vs player, 2 - player vs AI easy, 3 - player vs AI medium, 4 - Unbeatable AI: "))
     while game_running:
         if player_input == "1":
             show_game(game_display)
-            board, current_player = input_for_players(game_display, current_player)
+            board, current_player = get_human_coordinates(game_display, current_player)
             game_running = check_if_win(game_display, current_player)
             if check_tie(game_display):
                 game_running = False
@@ -18,7 +18,7 @@ def game_start(game_display, game_running, current_player, first_time):
 
         elif player_input == "2":
             show_game(game_display)
-            board, current_player = input_for_players(game_display, current_player)
+            board, current_player = get_human_coordinates(game_display, current_player)
             game_running = check_if_win(game_display, current_player)
             if check_tie(game_display):
                 game_running = False
@@ -31,7 +31,7 @@ def game_start(game_display, game_running, current_player, first_time):
 
         elif player_input == "3":
             show_game(game_display)
-            board, current_player = input_for_players(game_display, current_player)
+            board, current_player = get_human_coordinates(game_display, current_player)
             show_game(game_display)
             if check_win(game_display):
                 game_running = check_if_win(game_display, current_player)
@@ -47,7 +47,7 @@ def game_start(game_display, game_running, current_player, first_time):
 
         elif player_input == "4":
             show_game(game_display)
-            board, current_player = input_for_players(game_display, current_player)
+            board, current_player = get_human_coordinates(game_display, current_player)
             show_game(game_display)
             if check_win(game_display):
                 game_running = check_if_win(game_display, current_player)
